@@ -2,21 +2,21 @@ import { stats } from "@/content/site";
 
 export function StatsBand() {
   return (
-    <section className="shell pb-[54px] pt-[10px] lg:pb-[86px]">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,780px)_1fr] lg:gap-16">
-        <p className="max-w-[750px] text-[clamp(22px,2.5vw,34px)] font-medium leading-[1.5]">
+    <section className="shell pb-[40px] pt-[6px] lg:pb-[60px]">
+      <div className="grid gap-6 lg:grid-cols-[minmax(0,640px)_1fr] lg:gap-12">
+        <p className="max-w-[620px] text-[clamp(18px,2vw,24px)] font-medium leading-[1.5] text-ink">
           {stats.headline.map((part, index) => (
-            <span key={index} className={part.accent ? "text-brand" : undefined}>
+            <span key={index} className={part.accent ? "text-brand font-semibold" : undefined}>
               {part.text}
             </span>
           ))}
         </p>
 
-        <div className="grid grid-cols-2 gap-8 self-start lg:gap-16 lg:pl-8">
+        <div className="grid grid-cols-2 gap-6 self-start lg:gap-10 lg:pl-6">
           {stats.figures.map((figure) => (
             <div key={figure.label}>
-              <p className="text-[clamp(38px,5vw,64px)] font-medium leading-none">{figure.value}</p>
-              <p className="mt-4 text-[15px] text-ink/70 lg:text-[19px]">{figure.label}</p>
+              <p className="text-[clamp(28px,3.5vw,44px)] font-bold leading-none text-ink">{figure.value}</p>
+              <p className="mt-2 text-[13px] text-ink/70 lg:text-[15px]">{figure.label}</p>
             </div>
           ))}
         </div>

@@ -21,18 +21,18 @@ export function TopCategories() {
   );
 
   const scrollFilters = (step: number) => {
-    filterRow.current?.scrollBy({ left: step * 220, behavior: "smooth" });
+    filterRow.current?.scrollBy({ left: step * 200, behavior: "smooth" });
   };
 
   return (
-    <section id="categories" className="shell pb-[60px] lg:pb-[92px]">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-        <h2 className="text-[clamp(30px,3.6vw,48px)] font-semibold">Top Categories</h2>
+    <section id="categories" className="shell pb-[50px] lg:pb-[70px]">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <h2 className="text-[clamp(24px,2.5vw,36px)] font-bold text-ink">Top Categories</h2>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div
             ref={filterRow}
-            className="flex flex-1 items-center gap-3 overflow-x-auto scroll-smooth pb-1 lg:max-w-[880px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex flex-1 items-center gap-2 overflow-x-auto scroll-smooth pb-1 lg:max-w-[700px] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {categoryFilters.map((item) => (
               <button
@@ -41,8 +41,8 @@ export function TopCategories() {
                 onClick={() => setFilter(item)}
                 className={
                   item === filter
-                    ? "h-[50px] shrink-0 rounded-full border border-ink/70 px-8 text-[17px] font-medium text-ink"
-                    : "h-[50px] shrink-0 rounded-full border border-[#dcdce0] px-8 text-[17px] text-ink transition-colors hover:border-ink/50"
+                    ? "h-[38px] shrink-0 rounded-full border border-ink bg-ink px-5 text-[13.5px] font-medium text-white"
+                    : "h-[38px] shrink-0 rounded-full border border-[#dcdce0] bg-white px-5 text-[13.5px] text-ink transition-colors hover:border-ink/50"
                 }
               >
                 {item}
@@ -50,36 +50,36 @@ export function TopCategories() {
             ))}
           </div>
 
-          <div className="hidden shrink-0 items-center gap-2 lg:flex">
+          <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
             <button
               type="button"
               aria-label="Previous categories"
               onClick={() => scrollFilters(-1)}
-              className="grid h-[48px] w-[48px] place-items-center rounded-full border border-[#dcdce0] text-ink/50 transition-colors hover:text-ink"
+              className="grid h-[38px] w-[38px] place-items-center rounded-full border border-[#dcdce0] text-ink/60 transition-colors hover:text-ink"
             >
-              <ChevronLeftIcon className="h-5 w-5" />
+              <ChevronLeftIcon className="h-4 w-4" />
             </button>
             <button
               type="button"
               aria-label="More categories"
               onClick={() => scrollFilters(1)}
-              className="grid h-[48px] w-[48px] place-items-center rounded-full bg-ink text-white transition-opacity hover:opacity-90"
+              className="grid h-[38px] w-[38px] place-items-center rounded-full bg-ink text-white transition-opacity hover:opacity-90"
             >
-              <ChevronRightIcon className="h-5 w-5" />
+              <ChevronRightIcon className="h-4 w-4" />
             </button>
           </div>
         </div>
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:mt-[42px] lg:grid-cols-3 xl:grid-cols-5">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:mt-[32px] lg:grid-cols-3 xl:grid-cols-5">
         {visible.map((item) => (
-          <article key={item.index} className="rounded-[18px] bg-[#f7f7f8] p-[10px]">
-            <div className="relative aspect-[280/210] w-full overflow-hidden rounded-[14px]">
+          <article key={item.index} className="rounded-[14px] bg-[#f7f7f8] p-[8px] transition-transform duration-200 hover:-translate-y-1">
+            <div className="relative aspect-[280/200] w-full overflow-hidden rounded-[10px]">
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 20vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 20vw"
                 className="object-cover"
               />
               <button
@@ -89,24 +89,24 @@ export function TopCategories() {
                 onClick={() =>
                   setLiked((current) => ({ ...current, [item.index]: !current[item.index] }))
                 }
-                className="absolute right-3 top-3 grid h-[34px] w-[34px] place-items-center rounded-full bg-white shadow-[0_4px_12px_rgba(0,0,0,0.12)]"
+                className="absolute right-2.5 top-2.5 grid h-[30px] w-[30px] place-items-center rounded-full bg-white/95 shadow-[0_3px_8px_rgba(0,0,0,0.12)]"
               >
                 <HeartIcon
                   filled={Boolean(liked[item.index])}
                   className={
-                    liked[item.index] ? "h-[18px] w-[18px] text-[#ef2b2b]" : "h-[18px] w-[18px] text-ink/70"
+                    liked[item.index] ? "h-[15px] w-[15px] text-[#ef2b2b]" : "h-[15px] w-[15px] text-ink/70"
                   }
                 />
               </button>
             </div>
 
-            <div className="px-[10px] pb-3 pt-4">
-              <h3 className="text-[19px] font-medium leading-tight">{item.title}</h3>
-              <p className="mt-2 line-clamp-2 text-[12.5px] leading-[1.5] text-ink/55">{item.body}</p>
-              <div className="mt-4 flex items-center gap-4">
-                <span className="text-[13px] font-semibold">{item.price}</span>
-                <span className="flex items-center gap-1 text-[13px] text-ink/60">
-                  <PinIcon className="h-[14px] w-[14px]" />
+            <div className="px-[8px] pb-2 pt-3">
+              <h3 className="text-[15px] font-semibold leading-snug text-ink">{item.title}</h3>
+              <p className="mt-1 line-clamp-2 text-[12px] leading-[1.45] text-ink/60">{item.body}</p>
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-[13px] font-bold text-ink">{item.price}</span>
+                <span className="flex items-center gap-1 text-[11.5px] text-ink/60">
+                  <PinIcon className="h-[12px] w-[12px]" />
                   {item.location}
                 </span>
               </div>
@@ -115,10 +115,10 @@ export function TopCategories() {
         ))}
       </div>
 
-      <div className="mt-10 flex justify-center lg:mt-[54px]">
+      <div className="mt-8 flex justify-center lg:mt-[40px]">
         <a
           href="#categories"
-          className="inline-flex h-[62px] items-center rounded-full bg-ink px-10 text-[19px] text-white transition-colors hover:bg-black"
+          className="inline-flex h-[46px] items-center rounded-full bg-ink px-8 text-[14px] font-medium text-white transition-colors hover:bg-black"
         >
           Explore more
         </a>

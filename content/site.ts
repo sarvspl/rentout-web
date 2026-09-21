@@ -7,7 +7,6 @@
 
 export const nav = [
   { label: "Home", href: "#home" },
-  { label: "Categories", href: "#categories" },
   { label: "About Us", href: "#about" },
   { label: "contact", href: "#contact" },
 ];
@@ -25,7 +24,7 @@ export const hero = {
   primaryCta: { label: "Explore Rental", href: "#categories" },
   secondaryCta: { label: "List Your Item", href: "#contact" },
   badge: ["Beautiful Things,", "Happier People."],
-  slides: 7,
+  slides: 6,
   /** Price pins, positioned as a percentage of the hero collage. */
   pins: [
     { label: "₹1k", left: 49.9, top: 52.8 },
@@ -80,8 +79,6 @@ export const franchise = {
         "Marketing Materials",
         "Training & Operational Support",
       ],
-      footerTitle: "Start Small",
-      footerNote: "Earn Big",
     },
     {
       tier: "Growth Tier",
@@ -98,8 +95,6 @@ export const franchise = {
         "Local Marketing Campaigns",
         "Dedicated Account Manager",
       ],
-      footerTitle: "Lead Your District",
-      footerNote: "Grow Together",
     },
     {
       tier: "Scale Tier",
@@ -117,8 +112,6 @@ export const franchise = {
         "Events & Partner Onboarding",
         "Priority Support",
       ],
-      footerTitle: "Build Your State",
-      footerNote: "Create Opportunities",
     },
     {
       tier: "Flagship Tier",
@@ -136,8 +129,6 @@ export const franchise = {
         "Technology & Product Support",
         "Highest Priority Support",
       ],
-      footerTitle: "Go National",
-      footerNote: "Be a Part of a Bigger Vision",
     },
   ],
 };
@@ -222,10 +213,22 @@ export const about = {
       body: "With access to online learning resources anyone can transfrm.",
     },
   ],
+  /** Staggered collage: each image keeps its own proportions, as in the design. */
   gallery: {
-    columnOne: ["/img/about-2.jpg", "/img/about-5.jpg"],
-    columnTwo: ["/img/about-3.jpg", "/img/about-4.jpg"],
-    columnThree: ["/img/about-1.jpg", "/img/about-6.jpg"],
+    // Left and right columns are mirrored: same tile heights, same top edge.
+    // Only the middle column is offset down, with a short wide tile on top.
+    columnOne: [
+      { src: "/img/about-2.jpg", ratio: "146/160" },
+      { src: "/img/about-5.jpg", ratio: "146/155" },
+    ],
+    columnTwo: [
+      { src: "/img/about-3.jpg", ratio: "146/88" },
+      { src: "/img/about-4.jpg", ratio: "146/158" },
+    ],
+    columnThree: [
+      { src: "/img/about-1.jpg", ratio: "146/160" },
+      { src: "/img/about-6.jpg", ratio: "146/155" },
+    ],
   },
 };
 
