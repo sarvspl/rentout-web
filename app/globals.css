@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: #f96e11;
+  --color-brand-soft: #fde2cf;
+  --color-ink: #262525;
+  --color-ink-deep: #111826;
+  --color-navy: #182a54;
+  --color-cream: #fdf9f3;
+  --color-lavender: #f2f0ff;
+  --color-grape: #7c3aed;
+  --color-royal: #4975e6;
+  --color-royal-deep: #0050ae;
+  --color-peach: #fde6d6;
+  --color-sky: #d4e7fd;
+  --color-muted: #6f6f73;
+  --color-line: #e8e8ea;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Page gutter: matches the 77px gutters of the 1728px design canvas. */
+  .shell {
+    width: 100%;
+    max-width: 1728px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4.45vw, 77px);
+  }
 }
