@@ -23,18 +23,8 @@ export const hero = {
   body: "Lorem ipsum is a scrambled, nonsensical passage of pseudo-Latin used universally as placeholder or dummy text in graphic design .It allows designers and developers to preview visual layouts",
   primaryCta: { label: "Explore Rental", href: "#categories" },
   secondaryCta: { label: "List Your Item", href: "#contact" },
-  badge: ["Beautiful Things,", "Happier People."],
   imageUrls: ["/img/hero-collage.png"],
   slides: 1,
-  /** Price pins, positioned as a percentage of the hero collage. */
-  pins: [
-    { label: "₹1k", left: 49.9, top: 52.8 },
-    { label: "₹80k", left: 15.7, top: 69 },
-    { label: "₹5k", left: 82.6, top: 69 },
-    { label: "₹1k", left: 42.2, top: 80.6 },
-    { label: "₹10k", left: 60, top: 86.9 },
-    { label: "₹4k", left: 25.4, top: 89.5 },
-  ],
 };
 
 export const stats = {

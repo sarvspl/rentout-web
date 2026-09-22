@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { hero as fallbackHero } from "@/content/site";
 import type { HeroContent } from "@/lib/cms";
-import { CartIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
 export function Hero({ content }: { content?: HeroContent }) {
   // `content` comes from the CMS; the shipped copy stands in when it cannot.
@@ -40,9 +40,6 @@ export function Hero({ content }: { content?: HeroContent }) {
               fetchPriority="high"
               className="h-auto w-full"
             />
-            {hero.pins.map((pin, index) => (
-              <Pin key={`${pin.label}-${index}`} label={pin.label} left={pin.left} top={pin.top} />
-            ))}
           </div>
         </div>
 
@@ -83,19 +80,6 @@ export function Hero({ content }: { content?: HeroContent }) {
               </a>
             </div>
           </div>
-
-          <div className="relative hidden lg:block">
-            <div className="absolute right-[4%] top-[10px] flex items-center gap-2.5 rounded-[12px] bg-white/95 px-3.5 py-2.5 shadow-[0_10px_28px_rgba(0,0,0,0.08)] backdrop-blur">
-              <span className="grid h-[40px] w-[40px] place-items-center rounded-[10px] bg-brand text-white">
-                <CartIcon className="h-5 w-5" />
-              </span>
-              <span className="text-[14px] font-medium leading-[1.25]">
-                {hero.badge[0]}
-                <br />
-                {hero.badge[1]}
-              </span>
-            </div>
-          </div>
         </div>
 
         {/* Mobile / tablet collage */}
@@ -107,9 +91,6 @@ export function Hero({ content }: { content?: HeroContent }) {
             fetchPriority="high"
             className="h-auto w-full"
           />
-          {hero.pins.map((pin, index) => (
-            <Pin key={`${pin.label}-m-${index}`} label={pin.label} left={pin.left} top={pin.top} small />
-          ))}
         </div>
 
         {hasCarousel ? (
@@ -153,35 +134,5 @@ export function Hero({ content }: { content?: HeroContent }) {
         )}
       </div>
     </section>
-  );
-}
-
-function Pin({
-  label,
-  left,
-  top,
-  small,
-}: {
-  label: string;
-  left: number;
-  top: number;
-  small?: boolean;
-}) {
-  return (
-    <span
-      className="absolute -translate-x-1/2 -translate-y-1/2"
-      style={{ left: `${left}%`, top: `${top}%` }}
-    >
-      <span
-        className={
-          small
-            ? "relative grid h-[28px] min-w-[28px] place-items-center rounded-full bg-white px-2 text-[9px] font-medium shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
-            : "relative grid h-[36px] min-w-[36px] place-items-center rounded-full bg-white px-2.5 text-[12px] font-medium shadow-[0_6px_16px_rgba(0,0,0,0.1)]"
-        }
-      >
-        {label}
-        <span className="absolute -right-0.5 -bottom-0.5 h-[8px] w-[8px] rounded-full bg-brand" />
-      </span>
-    </span>
   );
 }

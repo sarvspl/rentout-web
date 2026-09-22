@@ -37,11 +37,9 @@ export type HeroContent = {
   body: string;
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
-  badge: string[];
   imageUrl: string;
   imageUrls: string[];
   slides: number;
-  pins: { label: string; left: number; top: number }[];
 };
 
 export type StatsContent = {
@@ -151,11 +149,9 @@ export const fallbackContent: SiteContent = {
     body: fallbackHero.body,
     primaryCta: fallbackHero.primaryCta,
     secondaryCta: fallbackHero.secondaryCta,
-    badge: fallbackHero.badge,
     imageUrl: "/img/hero-collage.png",
     imageUrls: fallbackHero.imageUrls,
     slides: fallbackHero.imageUrls.length,
-    pins: fallbackHero.pins,
   },
   stats: {
     headline: fallbackStats.headline.map((part) => part.text).join(""),
@@ -243,12 +239,9 @@ type ApiHero = {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
-  badgeLine1?: string;
-  badgeLine2?: string;
   imageUrl: string;
   imageUrls?: string[];
   slideCount: number;
-  pins?: { label: string; leftPercent: number; topPercent: number }[];
 };
 
 function toHeroContent(hero: ApiHero): HeroContent {
@@ -260,7 +253,6 @@ function toHeroContent(hero: ApiHero): HeroContent {
   const imageUrls = Array.isArray(hero.imageUrls) && hero.imageUrls.length > 0
     ? hero.imageUrls.filter(Boolean)
     : [hero.imageUrl].filter(Boolean);
-  const badge = [hero.badgeLine1, hero.badgeLine2].filter((line): line is string => Boolean(line));
 
   return {
     eyebrow: hero.eyebrow,
@@ -268,15 +260,9 @@ function toHeroContent(hero: ApiHero): HeroContent {
     body: hero.body,
     primaryCta: { label: hero.primaryCtaLabel, href: hero.primaryCtaHref },
     secondaryCta: { label: hero.secondaryCtaLabel, href: hero.secondaryCtaHref },
-    badge,
     imageUrl: imageUrls[0] ?? hero.imageUrl,
     imageUrls,
     slides: Math.max(1, imageUrls.length),
-    pins: (hero.pins ?? []).map((pin) => ({
-      label: pin.label,
-      left: Number(pin.leftPercent),
-      top: Number(pin.topPercent),
-    })),
   };
 }
 
