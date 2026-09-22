@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { nav } from "@/content/site";
+import { useEffect, useRef, useState } from "react";
+import { appCta, nav } from "@/content/site";
 import type { NavLink } from "@/lib/cms";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 
@@ -10,6 +10,22 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
   const links = navLinks?.length ? navLinks : nav;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(links[0]?.label ?? "");
+
+  // The apps are not out yet, so the button answers rather than navigates.
+  // The notice clears itself; the timer is held so a second press restarts it
+  // instead of letting the first one cut the second one short.
+  const [notice, setNotice] = useState(false);
+  const noticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (noticeTimer.current) clearTimeout(noticeTimer.current);
+  }, []);
+
+  function announceApp() {
+    setNotice(true);
+    if (noticeTimer.current) clearTimeout(noticeTimer.current);
+    noticeTimer.current = setTimeout(() => setNotice(false), 2500);
+  }
 
   return (
     <div>
@@ -51,7 +67,24 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2.5 lg:justify-self-end lg:gap-3.5">
+          <div className="relative flex items-center gap-2.5 lg:justify-self-end lg:gap-3.5">
+            <button
+              type="button"
+              onClick={announceApp}
+              className="hidden h-[44px] items-center rounded-full bg-[#262626] px-6 text-[15px] font-medium text-white transition-opacity hover:opacity-90 lg:inline-flex"
+            >
+              {appCta.label}
+            </button>
+
+            {notice ? (
+              <span
+                role="status"
+                className="absolute right-0 top-[calc(100%+10px)] z-20 hidden whitespace-nowrap rounded-full bg-ink px-4 py-2 text-[13px] font-medium text-white shadow-[0_10px_28px_rgba(0,0,0,0.12)] lg:block"
+              >
+                {appCta.notice}
+              </span>
+            ) : null}
+
             <button
               type="button"
               aria-label="Menu"
@@ -65,7 +98,7 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
         </div>
 
         {open ? (
-          <div className="shell pb-5 lg:hidden">
+          <div className="shell relative pb-5 lg:hidden">
             <nav className="flex flex-col gap-1 border-t border-ink/10 pt-3">
               {links.map((item) => (
                 <a
@@ -80,6 +113,20 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
                   {item.label}
                 </a>
               ))}
+
+              <button
+                type="button"
+                onClick={announceApp}
+                className="mt-2 inline-flex h-[44px] items-center justify-center rounded-full bg-[#262626] px-6 text-[15px] font-medium text-white"
+              >
+                {appCta.label}
+              </button>
+
+              {notice ? (
+                <span role="status" className="mt-2 text-center text-[13px] text-ink/70">
+                  {appCta.notice}
+                </span>
+              ) : null}
             </nav>
           </div>
         ) : null}

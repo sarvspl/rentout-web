@@ -222,3 +222,21 @@ export const serviceIcons: Record<string, (props: IconProps) => React.JSX.Elemen
   megaphone: MegaphoneIcon,
   headphones: HeadphonesIcon,
 };
+
+export function AppleIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.15-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.78-1.5.02-2.9.87-3.65 2.2-1.57 2.7-.4 6.7 1.12 8.9.75 1.07 1.63 2.28 2.8 2.23 1.12-.04 1.55-.72 2.9-.72 1.35 0 1.73.72 2.9.7 1.2-.02 1.96-1.09 2.7-2.17.85-1.24 1.2-2.45 1.22-2.51-.03-.01-2.34-.9-2.36-3.55z" />
+      <path d="M14.3 6.3c.6-.74 1.02-1.77.9-2.8-.88.04-1.95.59-2.58 1.32-.56.65-1.05 1.7-.92 2.7.98.08 1.98-.5 2.6-1.22z" />
+    </svg>
+  );
+}
+
+/** The Play triangle, drawn as one shape: this is a footer badge, not a logo. */
+export function PlayStoreIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M4.4 2.6a1 1 0 0 0-.5.88v17.04a1 1 0 0 0 .5.88l9.35-9.4zM15.1 10.6 5.9 1.9l9.6 5.5zM16.9 12l3.1-1.77c.7-.4.7-1.4 0-1.8L17.3 6.7l-2.2 2.2zM5.9 22.1l9.2-8.7 2.2 2.2z" />
+    </svg>
+  );
+}

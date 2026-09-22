@@ -11,6 +11,12 @@ export const nav = [
   { label: "contact", href: "#contact" },
 ];
 
+/** The navbar button. The apps are not out yet, hence the notice. */
+export const appCta = {
+  label: "Get the App",
+  notice: "Coming soon",
+};
+
 export const hero = {
   eyebrow: "All quality thing for a better you",
   titleLines: [

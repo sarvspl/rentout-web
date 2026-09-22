@@ -6,6 +6,7 @@ import {
 import type { FooterContent, NavLink, NewsletterContent } from "@/lib/cms";
 import { MailIcon, PhoneIcon, socialIcons } from "@/components/icons";
 import { NewsletterForm } from "@/components/newsletter-form";
+import { StoreBadges } from "@/components/store-badges";
 
 export function SiteFooter({
   navLinks,
@@ -129,12 +130,11 @@ export function SiteFooter({
             </div>
           </div>
 
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={footer.logo}
-            alt="RentOut"
-            className="mt-8 h-[64px] w-[64px] object-contain"
-          />
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-6">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={footer.logo} alt="RentOut" className="h-[64px] w-[64px] object-contain" />
+            <StoreBadges />
+          </div>
 
           <div className="mt-6 flex flex-col gap-3 border-t border-ink/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[13px] text-ink/70">{footer.copyright}</p>
