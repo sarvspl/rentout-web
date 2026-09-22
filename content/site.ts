@@ -24,7 +24,8 @@ export const hero = {
   primaryCta: { label: "Explore Rental", href: "#categories" },
   secondaryCta: { label: "List Your Item", href: "#contact" },
   badge: ["Beautiful Things,", "Happier People."],
-  slides: 6,
+  imageUrls: ["/img/hero-collage.png"],
+  slides: 1,
   /** Price pins, positioned as a percentage of the hero collage. */
   pins: [
     { label: "₹1k", left: 49.9, top: 52.8 },

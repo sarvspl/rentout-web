@@ -39,6 +39,7 @@ export type HeroContent = {
   secondaryCta: { label: string; href: string };
   badge: string[];
   imageUrl: string;
+  imageUrls: string[];
   slides: number;
   pins: { label: string; left: number; top: number }[];
 };
@@ -152,7 +153,8 @@ export const fallbackContent: SiteContent = {
     secondaryCta: fallbackHero.secondaryCta,
     badge: fallbackHero.badge,
     imageUrl: "/img/hero-collage.png",
-    slides: fallbackHero.slides,
+    imageUrls: fallbackHero.imageUrls,
+    slides: fallbackHero.imageUrls.length,
     pins: fallbackHero.pins,
   },
   stats: {
@@ -241,11 +243,12 @@ type ApiHero = {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
-  badgeLine1: string;
-  badgeLine2: string;
+  badgeLine1?: string;
+  badgeLine2?: string;
   imageUrl: string;
+  imageUrls?: string[];
   slideCount: number;
-  pins: { label: string; leftPercent: number; topPercent: number }[];
+  pins?: { label: string; leftPercent: number; topPercent: number }[];
 };
 
 function toHeroContent(hero: ApiHero): HeroContent {
@@ -254,6 +257,10 @@ function toHeroContent(hero: ApiHero): HeroContent {
     ...(hero.titleLine2 ? [{ text: `${hero.titleLine2} `, accent: false }] : []),
     ...(hero.titleLine2Accent ? [{ text: hero.titleLine2Accent, accent: true }] : []),
   ];
+  const imageUrls = Array.isArray(hero.imageUrls) && hero.imageUrls.length > 0
+    ? hero.imageUrls.filter(Boolean)
+    : [hero.imageUrl].filter(Boolean);
+  const badge = [hero.badgeLine1, hero.badgeLine2].filter((line): line is string => Boolean(line));
 
   return {
     eyebrow: hero.eyebrow,
@@ -261,9 +268,10 @@ function toHeroContent(hero: ApiHero): HeroContent {
     body: hero.body,
     primaryCta: { label: hero.primaryCtaLabel, href: hero.primaryCtaHref },
     secondaryCta: { label: hero.secondaryCtaLabel, href: hero.secondaryCtaHref },
-    badge: [hero.badgeLine1, hero.badgeLine2].filter(Boolean),
-    imageUrl: hero.imageUrl,
-    slides: hero.slideCount,
+    badge,
+    imageUrl: imageUrls[0] ?? hero.imageUrl,
+    imageUrls,
+    slides: Math.max(1, imageUrls.length),
     pins: (hero.pins ?? []).map((pin) => ({
       label: pin.label,
       left: Number(pin.leftPercent),
