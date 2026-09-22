@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { hero as fallbackHero } from "@/content/site";
 import type { HeroContent } from "@/lib/cms";
@@ -23,12 +22,11 @@ export function Hero({ content }: { content?: HeroContent }) {
         {/* Collage: full-bleed background placement on desktop */}
         <div className="pointer-events-none absolute bottom-[40px] left-1/2 hidden w-screen -translate-x-1/2 lg:block">
           <div className="relative mx-auto w-full max-w-[1340px]">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={hero.imageUrl}
               alt=""
-              width={1400}
-              height={710}
-              priority
+              fetchPriority="high"
               className="h-auto w-full"
             />
             {hero.pins.map((pin, index) => (
@@ -91,12 +89,11 @@ export function Hero({ content }: { content?: HeroContent }) {
 
         {/* Mobile / tablet collage */}
         <div className="relative mt-6 lg:hidden">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={hero.imageUrl}
             alt="Rent furniture, vehicles, appliances and devices"
-            width={1400}
-            height={710}
-            priority
+            fetchPriority="high"
             className="h-auto w-full"
           />
           {hero.pins.map((pin, index) => (

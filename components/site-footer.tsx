@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   footer as fallbackFooter,
   newsletter as fallbackNewsletter,
@@ -46,13 +45,8 @@ export function SiteFooter({
         <div className="relative z-10 mx-auto max-w-[900px] rounded-[20px] bg-royal px-5 py-8 sm:px-8 lg:px-[48px] lg:py-[42px]">
           <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-6">
             <div className="relative mx-auto h-[180px] w-[180px] lg:absolute lg:-top-[90px] lg:left-[-10px] lg:h-[340px] lg:w-[340px]">
-              <Image
-                src={card.image}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 180px, 340px"
-                className="object-contain"
-              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={card.image} alt="" className="h-full w-full object-contain" />
             </div>
 
             <div className="lg:col-start-2">
@@ -135,11 +129,10 @@ export function SiteFooter({
             </div>
           </div>
 
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={footer.logo}
             alt="RentOut"
-            width={240}
-            height={240}
             className="mt-8 h-[64px] w-[64px] object-contain"
           />
 
