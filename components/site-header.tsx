@@ -3,11 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import { nav } from "@/content/site";
+import type { NavLink } from "@/lib/cms";
 import { CloseIcon, MenuIcon } from "@/components/icons";
 
-export function SiteHeader() {
+export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
+  const links = navLinks?.length ? navLinks : nav;
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(nav[0].label);
+  const [active, setActive] = useState(links[0]?.label ?? "");
 
   return (
     <div>
@@ -33,7 +35,7 @@ export function SiteHeader() {
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex lg:justify-self-center xl:gap-10">
-            {nav.map((item) => (
+            {links.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
@@ -65,7 +67,7 @@ export function SiteHeader() {
         {open ? (
           <div className="shell pb-5 lg:hidden">
             <nav className="flex flex-col gap-1 border-t border-ink/10 pt-3">
-              {nav.map((item) => (
+              {links.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}

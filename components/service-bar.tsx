@@ -1,15 +1,19 @@
 import { serviceIcons } from "@/components/icons";
-import { services } from "@/content/site";
+import { services as fallbackServices } from "@/content/site";
+import type { ServiceItem } from "@/lib/cms";
 
-export function ServiceBar() {
+export function ServiceBar({ items }: { items?: ServiceItem[] }) {
+  const services: ServiceItem[] = items?.length ? items : fallbackServices;
+
   return (
     <section className="bg-lavender">
       <div className="shell grid grid-cols-1 gap-6 py-7 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:py-[28px]">
         {services.map((service, index) => {
-          const Icon = serviceIcons[service.icon];
+          // An unknown icon key must not blank the strip.
+          const Icon = serviceIcons[service.icon] ?? serviceIcons.cart;
           return (
             <div
-              key={service.title}
+              key={`${service.title}-${index}`}
               className={
                 index === 0
                   ? "flex items-center gap-3.5 lg:pr-6"

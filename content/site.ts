@@ -286,15 +286,7 @@ export const footer = {
   blurb:
     "Macat Megatrons is a thriving community where to share knowledge, collaborate, and grow.",
   socials: ["facebook", "instagram", "google", "x", "linkedin"],
-  columns: [
-    { title: "Company", links: ["About us", "Services", "Community", "Testimonial"] },
-    {
-      title: "Developers",
-      links: ["Web Technologies", "Learn Web Development", "MM Plus", "Hacks Blog"],
-    },
-    { title: "Our communities", links: ["MM Communities", "MM Forum", "MM Chat"] },
-  ],
   contact: { phone: "+123 456 7890", email: "support@mm.com" },
   copyright: "© 2025 Rentout. All rights reserved.",
-  legal: ["Privacy Policy", "Terms of Use", "Legal", "Site Map"],
+  legal: ["Privacy Policy", "Terms of Use"],
 };

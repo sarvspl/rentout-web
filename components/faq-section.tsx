@@ -1,31 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { faq } from "@/content/site";
+import type { FaqContent } from "@/lib/cms";
 import { MinusIcon, PlusIcon } from "@/components/icons";
 
-type Item = { id: string; question: string };
+/**
+ * The FAQ band.
+ *
+ * The CMS holds one ordered list; the two columns are a layout decision made
+ * here, so an editor never has to think about which side a question lands on.
+ * Odd positions go left, even right, which keeps reading order sensible when
+ * a question is inserted in the middle.
+ */
+export function FaqSection({ content }: { content: FaqContent }) {
+  const [open, setOpen] = useState<string | null>(content.items[0]?.id ?? null);
 
-export function FaqSection() {
-  const [open, setOpen] = useState<string | null>(faq.columnOne[0].id);
+  if (content.items.length === 0) return null;
 
   const toggle = (id: string) => setOpen((current) => (current === id ? null : id));
+
+  const left = content.items.filter((_, index) => index % 2 === 0);
+  const right = content.items.filter((_, index) => index % 2 === 1);
 
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(240deg,#fff1e6_0%,#fff8f3_38%,#ffffff_72%)] py-[50px] lg:py-[70px]">
       <div className="shell">
         <h2 className="text-center text-[clamp(22px,2.5vw,32px)] font-bold text-navy">
-          {faq.title}
+          {content.title}
         </h2>
 
         <div className="mx-auto mt-8 grid max-w-[1000px] gap-4 lg:mt-[50px] lg:grid-cols-2 lg:items-start">
           <div className="space-y-4">
-            {faq.columnOne.map((item) => (
+            {left.map((item) => (
               <FaqCard key={item.id} item={item} open={open === item.id} onToggle={toggle} />
             ))}
           </div>
           <div className="space-y-4">
-            {faq.columnTwo.map((item) => (
+            {right.map((item) => (
               <FaqCard key={item.id} item={item} open={open === item.id} onToggle={toggle} />
             ))}
           </div>
@@ -40,7 +51,7 @@ function FaqCard({
   open,
   onToggle,
 }: {
-  item: Item;
+  item: { id: string; question: string; answer: string };
   open: boolean;
   onToggle: (id: string) => void;
 }) {
@@ -60,7 +71,7 @@ function FaqCard({
 
       {open ? (
         <p className="mt-3 max-w-[360px] pl-7 text-[12px] leading-[1.65] text-ink/65">
-          {faq.answer}
+          {item.answer}
         </p>
       ) : null}
     </div>

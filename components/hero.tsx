@@ -2,10 +2,17 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { hero } from "@/content/site";
+import { hero as fallbackHero } from "@/content/site";
+import type { HeroContent } from "@/lib/cms";
 import { CartIcon, ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
-export function Hero() {
+export function Hero({ content }: { content?: HeroContent }) {
+  // `content` comes from the CMS; the shipped copy stands in when it cannot.
+  const hero: HeroContent = content ?? {
+    ...fallbackHero,
+    imageUrl: "/img/hero-collage.png",
+  };
+
   const [slide, setSlide] = useState(0);
   const move = (step: number) =>
     setSlide((current) => (current + step + hero.slides) % hero.slides);
@@ -17,7 +24,7 @@ export function Hero() {
         <div className="pointer-events-none absolute bottom-[40px] left-1/2 hidden w-screen -translate-x-1/2 lg:block">
           <div className="relative mx-auto w-full max-w-[1340px]">
             <Image
-              src="/img/hero-collage.png"
+              src={hero.imageUrl}
               alt=""
               width={1400}
               height={710}
@@ -85,7 +92,7 @@ export function Hero() {
         {/* Mobile / tablet collage */}
         <div className="relative mt-6 lg:hidden">
           <Image
-            src="/img/hero-collage.png"
+            src={hero.imageUrl}
             alt="Rent furniture, vehicles, appliances and devices"
             width={1400}
             height={710}

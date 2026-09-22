@@ -1,8 +1,11 @@
 import Image from "next/image";
-import { franchise } from "@/content/site";
+import { franchise as fallbackFranchise } from "@/content/site";
+import type { FranchiseContent } from "@/lib/cms";
 import { PinIcon } from "@/components/icons";
 
-export function FranchiseSection() {
+export function FranchiseSection({ content }: { content?: FranchiseContent }) {
+  const franchise: FranchiseContent = content ?? fallbackFranchise;
+
   return (
     <section className="shell py-[50px] lg:py-[70px]">
       <div className="grid gap-8 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-[32px]">
@@ -21,7 +24,7 @@ export function FranchiseSection() {
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {franchise.plans.map((plan) => (
             <article
-              key={plan.tier}
+              key={`${plan.tier}-${plan.name}`}
               className="flex flex-col overflow-hidden rounded-[14px] bg-white shadow-[0_6px_24px_rgba(17,24,38,0.08)] transition-transform duration-200 hover:-translate-y-1"
             >
               <div className="relative aspect-[304/300] w-full">

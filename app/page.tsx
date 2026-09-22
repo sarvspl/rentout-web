@@ -9,22 +9,48 @@ import { SiteHeader } from "@/components/site-header";
 import { StatsBand } from "@/components/stats-band";
 import { TopCategories } from "@/components/top-categories";
 import { WallOfLove } from "@/components/wall-of-love";
+import { getSiteContent } from "@/lib/cms";
+import { getHomeCategories } from "@/lib/catalogue";
 
-export default function Home() {
+export default async function Home() {
+  // Editorial copy the admin panel owns, and the live category catalogue.
+  // The copy falls back to shipped content if the backend is unreachable, so
+  // the page always renders.
+  const [
+    {
+      navLinks,
+      hero,
+      stats,
+      services,
+      franchise,
+      cities,
+      about,
+      faq,
+      testimonials,
+      newsletter,
+      footer,
+    },
+    categories,
+  ] =
+    await Promise.all([
+      getSiteContent(),
+      getHomeCategories(),
+    ]);
+
   return (
     <>
-      <SiteHeader />
+      <SiteHeader navLinks={navLinks} />
       <main>
-        <Hero />
-        <StatsBand />
-        <ServiceBar />
-        <FranchiseSection />
-        <TopCategories />
-        <ExploreCities />
-        <AboutSection />
-        <FaqSection />
-        <WallOfLove />
-        <SiteFooter />
+        <Hero content={hero} />
+        <StatsBand content={stats} />
+        <ServiceBar items={services} />
+        <FranchiseSection content={franchise} />
+        <TopCategories categories={categories} />
+        <ExploreCities content={cities} />
+        <AboutSection content={about} />
+        <FaqSection content={faq} />
+        <WallOfLove content={testimonials} />
+        <SiteFooter navLinks={navLinks} newsletter={newsletter} content={footer} />
       </main>
     </>
   );
