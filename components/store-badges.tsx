@@ -6,7 +6,7 @@ import { AppleIcon, PlayStoreIcon } from "@/components/icons";
 
 const STORES = [
   { key: "play", line1: "GET IT ON", line2: "Google Play", Icon: PlayStoreIcon },
-  { key: "app", line1: "Download on the", line2: "App Store", Icon: AppleIcon },
+  { key: "app", line1: "DOWNLOAD ON THE", line2: "App Store", Icon: AppleIcon },
 ];
 
 /**

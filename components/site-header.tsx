@@ -4,14 +4,19 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { appCta, nav } from "@/content/site";
 import type { NavLink } from "@/lib/cms";
-import { CloseIcon, MenuIcon } from "@/components/icons";
+import { AppleIcon, CloseIcon, MenuIcon, PlayStoreIcon } from "@/components/icons";
+
+const STORES = [
+  { key: "play", line1: "GET IT ON", line2: "Google Play", Icon: PlayStoreIcon },
+  { key: "app", line1: "DOWNLOAD ON THE", line2: "App Store", Icon: AppleIcon },
+];
 
 export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
   const links = navLinks?.length ? navLinks : nav;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(links[0]?.label ?? "");
 
-  // The apps are not out yet, so the button answers rather than navigates.
+  // The apps are not out yet, so the buttons answer rather than navigate.
   // The notice clears itself; the timer is held so a second press restarts it
   // instead of letting the first one cut the second one short.
   const [notice, setNotice] = useState(false);
@@ -37,7 +42,7 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
           aria-hidden
           className="pointer-events-none absolute inset-0 rounded-b-[24px] bg-[linear-gradient(90deg,#FFFFFB_0%,#FDF8EF_73.9%)] opacity-[0.68] backdrop-blur-[207.7px]"
         />
-        {/* Three columns from lg up, so the nav stays centred with nothing on the right. */}
+        {/* Three columns from lg up, so the nav stays centred with store badges on the right. */}
         <div className="shell relative flex h-[68px] items-center justify-between gap-4 lg:grid lg:h-[80px] lg:grid-cols-[1fr_auto_1fr]">
           <a href="#home" className="shrink-0 lg:justify-self-start">
             <Image
@@ -67,14 +72,26 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
             ))}
           </nav>
 
-          <div className="relative flex items-center gap-2.5 lg:justify-self-end lg:gap-3.5">
-            <button
-              type="button"
-              onClick={announceApp}
-              className="hidden h-[44px] items-center rounded-full bg-[#262626] px-6 text-[15px] font-medium text-white transition-opacity hover:opacity-90 lg:inline-flex"
-            >
-              {appCta.label}
-            </button>
+          <div className="relative flex items-center gap-2.5 lg:justify-self-end lg:gap-3">
+            <div className="hidden items-center gap-2 xl:gap-2.5 lg:flex">
+              {STORES.map(({ key, line1, line2, Icon }) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={announceApp}
+                  aria-label={`${line2} - ${appCta.notice}`}
+                  className="inline-flex items-center gap-2 rounded-[9px] bg-[#262626] px-3 py-1.5 text-left text-white transition-opacity hover:opacity-90"
+                >
+                  <Icon className="h-[20px] w-[20px] shrink-0" />
+                  <span className="leading-tight">
+                    <span className="block text-[8px] font-medium uppercase tracking-[0.06em] text-white/75">
+                      {line1}
+                    </span>
+                    <span className="block text-[12.5px] font-semibold text-white">{line2}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
 
             {notice ? (
               <span
@@ -114,13 +131,25 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
                 </a>
               ))}
 
-              <button
-                type="button"
-                onClick={announceApp}
-                className="mt-2 inline-flex h-[44px] items-center justify-center rounded-full bg-[#262626] px-6 text-[15px] font-medium text-white"
-              >
-                {appCta.label}
-              </button>
+              <div className="mt-2.5 flex flex-wrap items-center gap-2">
+                {STORES.map(({ key, line1, line2, Icon }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={announceApp}
+                    aria-label={`${line2} - ${appCta.notice}`}
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-[9px] bg-[#262626] px-3 py-2 text-left text-white"
+                  >
+                    <Icon className="h-[18px] w-[18px] shrink-0" />
+                    <span className="leading-tight">
+                      <span className="block text-[8px] font-medium uppercase tracking-[0.06em] text-white/75">
+                        {line1}
+                      </span>
+                      <span className="block text-[12px] font-semibold text-white">{line2}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
 
               {notice ? (
                 <span role="status" className="mt-2 text-center text-[13px] text-ink/70">
