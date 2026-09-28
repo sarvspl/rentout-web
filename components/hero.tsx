@@ -87,7 +87,7 @@ export function Hero({ content }: { content?: HeroContent }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={activeImage}
-            alt="Rent furniture, vehicles, appliances and devices"
+            alt="Rent property, vehicles, electronics, furniture, equipment and more"
             fetchPriority="high"
             className="h-auto w-full"
           />

@@ -104,29 +104,36 @@ export function SiteFooter({
                 </ul>
               </div>
 
-              <div>
-                <p className="text-[14px] font-semibold text-ink">Contact</p>
-                <ul className="mt-3 space-y-2.5">
-                  <li>
-                    <a
-                      href={`tel:${footer.phone.replace(/\s/g, "")}`}
-                      className="flex items-center gap-2 text-[13.5px] text-ink/75 hover:text-ink"
-                    >
-                      <PhoneIcon className="h-[15px] w-[15px] text-royal" />
-                      {footer.phone}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href={`mailto:${footer.email}`}
-                      className="flex items-center gap-2 text-[13.5px] text-ink/75 hover:text-ink"
-                    >
-                      <MailIcon className="h-[15px] w-[15px] text-royal" />
-                      {footer.email}
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              {/* Empty contact details are hidden, never shown as placeholders. */}
+              {footer.phone || footer.email ? (
+                <div>
+                  <p className="text-[14px] font-semibold text-ink">Contact</p>
+                  <ul className="mt-3 space-y-2.5">
+                    {footer.phone ? (
+                      <li>
+                        <a
+                          href={`tel:${footer.phone.replace(/\s/g, "")}`}
+                          className="flex items-center gap-2 text-[13.5px] text-ink/75 hover:text-ink"
+                        >
+                          <PhoneIcon className="h-[15px] w-[15px] text-royal" />
+                          {footer.phone}
+                        </a>
+                      </li>
+                    ) : null}
+                    {footer.email ? (
+                      <li>
+                        <a
+                          href={`mailto:${footer.email}`}
+                          className="flex items-center gap-2 text-[13.5px] text-ink/75 hover:text-ink"
+                        >
+                          <MailIcon className="h-[15px] w-[15px] text-royal" />
+                          {footer.email}
+                        </a>
+                      </li>
+                    ) : null}
+                  </ul>
+                </div>
+              ) : null}
             </div>
           </div>
 

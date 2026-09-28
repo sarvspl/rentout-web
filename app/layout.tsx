@@ -10,9 +10,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "RentOut — Rent Everything",
+  title: "RentOut — India's All-in-One Rental Marketplace",
   description:
-    "Elevate your living. Rent furniture, vehicles, appliances and devices with flexible plans and quality products.",
+    "Rent what you need. List what you own. Earn from what you have. Property, vehicles, electronics, furniture, appliances, tools, events and services on one rental marketplace.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

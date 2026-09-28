@@ -12,7 +12,11 @@ import type { CatalogueCategory } from "@/lib/catalogue";
 export function TopCategories({ categories }: { categories: CatalogueCategory[] }) {
   return (
     <section id="categories" className="shell pb-[50px] lg:pb-[70px]">
-      <h2 className="text-[clamp(24px,2.5vw,36px)] font-bold text-ink">Top Categories</h2>
+      <h2 className="text-[clamp(24px,2.5vw,36px)] font-bold text-ink">Explore Rentals</h2>
+      <p className="mt-2 text-[14px] text-ink/70">
+        Find what you need, when you need it. Search by category, location, price, availability and
+        rental duration.
+      </p>
 
       {categories.length === 0 ? (
         <p className="mt-6 rounded-[14px] bg-[#f7f7f8] px-6 py-10 text-center text-[15px] text-ink/60">

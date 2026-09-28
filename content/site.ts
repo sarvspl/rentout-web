@@ -3,63 +3,70 @@
  *
  * Components never hardcode content, so swapping this file for CMS calls later
  * is a drop-in change: keep the shapes, change the source.
+ *
+ * Copy follows RentOut_Website_Content_Master.pdf. Keep it in step with the
+ * backend CMS seed (rentout-backend/prisma/seed/cms.seed.js): this file is only
+ * what the site shows when the backend cannot be reached.
  */
 
 export const nav = [
   { label: "Home", href: "#home" },
+  { label: "Explore Rentals", href: "#categories" },
   { label: "About Us", href: "#about" },
-  { label: "contact", href: "#contact" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
 ];
 
 /** The navbar button. The apps are not out yet, hence the notice. */
 export const appCta = {
   label: "Get the App",
-  notice: "Coming soon",
+  notice: "Coming soon on Android",
 };
 
 export const hero = {
-  eyebrow: "All quality thing for a better you",
+  eyebrow: "India’s All-in-One Rental Marketplace",
   titleLines: [
-    [{ text: "ELEVATE", accent: false }],
+    [{ text: "WHY BUY WHEN", accent: false }],
     [
-      { text: "YOUR ", accent: false },
-      { text: "LIVING", accent: true },
+      { text: "YOU CAN ", accent: false },
+      { text: "RENT?", accent: true },
     ],
   ],
-  body: "Lorem ipsum is a scrambled, nonsensical passage of pseudo-Latin used universally as placeholder or dummy text in graphic design .It allows designers and developers to preview visual layouts",
-  primaryCta: { label: "Explore Rental", href: "#categories" },
-  secondaryCta: { label: "List Your Item", href: "#contact" },
+  body: "Rent what you need. List what you own. Earn from what you have. From homes and vehicles to laptops, cameras, furniture, machinery, event equipment and more — RentOut connects people and businesses looking to rent with owners ready to rent out.",
+  primaryCta: { label: "Explore Rentals", href: "#categories" },
+  secondaryCta: { label: "List Your Asset", href: "#contact" },
   imageUrls: ["/img/hero-collage.png"],
   slides: 1,
 };
 
 export const stats = {
   headline: [
-    { text: "We’re ", accent: false },
-    { text: "transforming", accent: true },
+    { text: "One Platform.", accent: true },
+    { text: " ", accent: false },
+    { text: "Endless Rental Possibilities.", accent: true },
     {
-      text: " the way you rent with solutions, flexible plans, and quality products designed to make everyday ",
+      text: " Why buy something you may only need for a day, a week or a few months? RentOut helps you access the things you need without the cost and commitment of buying.",
       accent: false,
     },
-    { text: "living easier.", accent: true },
   ],
+  // No numerical claims until real data backs them.
   figures: [
-    { value: "120k+", label: "Customer satisfaction in 2024" },
-    { value: "90%", label: "Customer satisfaction" },
+    { value: "Rent More.", label: "Access what you need, when you need it." },
+    { value: "Own Less.", label: "Unlock value from underused assets." },
   ],
 };
 
 export const services = [
-  { icon: "cart", title: "Free Shipping", subtitle: "On all Order" },
-  { icon: "shield", title: "Secure Payment", subtitle: "On all Order" },
-  { icon: "megaphone", title: "Marketing Support", subtitle: "On all Order" },
-  { icon: "headphones", title: "24/7 Hours help", subtitle: "On all Order" },
+  { icon: "cart", title: "One Marketplace", subtitle: "Multiple rental categories, one platform." },
+  { icon: "shield", title: "Transparent Listings", subtitle: "Pricing and rental conditions up front." },
+  { icon: "megaphone", title: "Local Discovery", subtitle: "Find rentals based on your location." },
+  { icon: "headphones", title: "Flexible Rental Options", subtitle: "Rent for as long as you need." },
 ];
 
 export const franchise = {
-  eyebrow: "Franchise opportunities",
-  title: "Choose the franchise model that scales with your ambition",
-  body: "Four polished tiers designed to make each franchise level feel premiummodern, and easy to compare at a glance.",
+  eyebrow: "RentOut Business",
+  title: "Build Your Business With RentOut",
+  body: "Become part of the rental economy. RentOut is designed to create opportunities for individuals, rental professionals, businesses and local entrepreneurs.",
   plans: [
     {
       tier: "Entry Tier",
@@ -130,85 +137,36 @@ export const franchise = {
   ],
 };
 
-export const categoryFilters = [
-  "All",
-  "Vehicles",
-  "Kitchen",
-  "Machines",
-  "Devices",
-  "Furniture",
-  "Property",
-];
-
-const listingBody =
-  "Lorem ipsum does not have a real, cheing in Latin; it is scrambled...";
-
-export const listings = [
-  { title: "Sofa set for living", image: "/img/cat-01.jpg", category: "Furniture", liked: true },
-  { title: "Chair set for room", image: "/img/cat-02.jpg", category: "Furniture", liked: false },
-  { title: "Car BMW for rent", image: "/img/cat-05.jpg", category: "Vehicles", liked: false },
-  { title: "Super speed laptop", image: "/img/cat-03.jpg", category: "Devices", liked: false },
-  { title: "Mobile for rent", image: "/img/cat-04.jpg", category: "Devices", liked: false },
-  { title: "Concrete Mixer", image: "/img/cat-06.jpg", category: "Machines", liked: false },
-  { title: "Family comfort villa", image: "/img/cat-07.jpg", category: "Property", liked: false },
-  { title: "Computer for living", image: "/img/cat-08.jpg", category: "Devices", liked: false },
-  { title: "Music system", image: "/img/cat-10.jpg", category: "Devices", liked: false },
-  { title: "Mobile for rent", image: "/img/cat-09.jpg", category: "Devices", liked: true },
-].map((item) => ({
-  ...item,
-  body: listingBody,
-  price: "₹10k/month",
-  location: "Kolkata Newtown",
-}));
-
+/** The tile strip: "RentOut for Every Need". */
 export const cities = {
-  title: "Explore Cities",
-  subtitle: "Aliquam lacinia diam quis lacus euismod",
-  linkLabel: "All Types",
+  title: "RentOut for Every Need",
+  subtitle: "Stop buying for every short-term need. Explore RentOut.",
+  linkLabel: "Explore Rentals",
   rows: [
     [
-      { name: "New York", count: "10 Properties", image: "/img/city-1.jpg", span: 570 },
-      { name: "Los Angeles", count: "2 Properties", image: "/img/city-2.jpg", span: 351 },
-      { name: "San Francisco", count: "1 Property", image: "/img/city-3.jpg", span: 270 },
-      { name: "New Jersey", count: "0 Properties", image: "/img/city-4.jpg", span: 357 },
+      { name: "Students", count: "Laptops, cameras, furniture, appliances and more.", image: "/img/cat-03.jpg", span: 420 },
+      { name: "Professionals", count: "Equipment, technology, workspace and business resources.", image: "/img/cat-08.jpg", span: 420 },
+      { name: "Families", count: "Homes, vehicles, appliances and furniture.", image: "/img/cat-07.jpg", span: 420 },
     ],
     [
-      { name: "San Francisco", count: "1 Property", image: "/img/city-3.jpg", span: 270 },
-      { name: "San Francisco", count: "1 Property", image: "/img/city-3.jpg", span: 270 },
-      { name: "Los Angeles", count: "2 Properties", image: "/img/city-2.jpg", span: 497 },
-      { name: "New York", count: "10 Properties", image: "/img/city-1.jpg", span: 570 },
+      { name: "Events", count: "Venues, equipment, furniture, photography and more.", image: "/img/cat-10.jpg", span: 570 },
+      { name: "Businesses", count: "Machinery, commercial spaces, vehicles, equipment and professional resources.", image: "/img/cat-06.jpg", span: 690 },
     ],
   ],
 };
 
 export const about = {
-  title: "About Us",
+  title: "About RentOut",
   body: [
-    "At Besnik Consultancy, we take pride in our values",
-    "– service, integrity, and excellence.",
+    "Reimagining the way India rents. RentOut was created with a simple idea: people don’t always need to own everything they use.",
+    "RentOut is designed to support everyone — from an individual renting out one item to professional rental companies managing hundreds of assets.",
   ],
-  cta: "Learn more",
+  cta: "List Your Asset",
   steps: [
-    {
-      number: "1.",
-      title: "Customer → Customer",
-      body: "You get a 2-week free trial to kick the Smarty tries. We want you to.",
-    },
-    {
-      number: "2.",
-      title: "Business → Customer",
-      body: "We give you a free course that guides you through the process.",
-    },
-    {
-      number: "3.",
-      title: "Business → Business",
-      body: "Use our multimedia lecturers, videos, and coaching sessions.",
-    },
-    {
-      number: "4.",
-      title: "Professional Rental Management",
-      body: "With access to online learning resources anyone can transfrm.",
-    },
+    { number: "1.", title: "Individuals", body: "Rent out personal assets — a laptop, a camera, an extra room or a vehicle." },
+    { number: "2.", title: "Professionals", body: "Build a rental business, starting with one asset and growing from there." },
+    { number: "3.", title: "Rental Companies", body: "Manage and grow your inventory with digital listings and availability management." },
+    { number: "4.", title: "Businesses", body: "Find resources without unnecessary ownership costs." },
   ],
   /** Staggered collage: each image keeps its own proportions, as in the design. */
   gallery: {
@@ -230,60 +188,91 @@ export const about = {
 };
 
 export const faq = {
-  title: "Frequently Ask Questions",
-  answer:
-    "Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now. In built table in an rapid blush. Merits behind on afraid or warmly.",
-  columnOne: [
-    { id: "q1", question: "How long until we deliver your first blog post?" },
-    { id: "q2", question: "How long until we deliver your first blog post?" },
-  ],
-  columnTwo: [
-    { id: "q3", question: "How long until we deliver your first blog post?" },
-    { id: "q4", question: "How long until we deliver your first blog post?" },
-    { id: "q5", question: "How long until we deliver your first blog post?" },
+  title: "Frequently Asked Questions",
+  items: [
+    {
+      question: "What is RentOut?",
+      answer: "RentOut is a digital rental marketplace designed to connect people and businesses looking to rent with owners and providers offering eligible assets, spaces, equipment and services for rent.",
+    },
+    {
+      question: "What can I rent on RentOut?",
+      answer: "Depending on availability and category policies, RentOut can support rentals across property, vehicles, electronics, furniture, appliances, tools, equipment, event resources, services and other eligible categories.",
+    },
+    {
+      question: "Can I list my own items?",
+      answer: "Yes. Owners can create rental listings for eligible assets according to RentOut’s listing policies and applicable laws.",
+    },
+    {
+      question: "Can businesses use RentOut?",
+      answer: "Yes. RentOut is designed for individuals and businesses, including professional rental companies and businesses looking for temporary access to assets.",
+    },
+    {
+      question: "Can I rent something for only one day?",
+      answer: "Rental duration depends on the asset, owner and applicable rental terms. Some assets may be available for daily rentals, while others may have weekly, monthly or longer-term options.",
+    },
+    {
+      question: "Does RentOut own the listed assets?",
+      answer: "Generally, RentOut operates as a technology marketplace connecting owners/providers with renters. Ownership and rental arrangements depend on the individual listing and applicable terms.",
+    },
+    {
+      question: "Are all listings verified?",
+      answer: "Verification requirements may vary by category and platform policy. Users should review listing details and applicable verification information before completing a rental.",
+    },
+    {
+      question: "Is online payment available?",
+      answer: "Where enabled for a particular category or transaction, RentOut may provide digital payment functionality through supported payment infrastructure.",
+    },
+    {
+      question: "Is a security deposit required?",
+      answer: "A security deposit may be required depending on the asset, owner, category and rental terms.",
+    },
+    {
+      question: "Can I cancel a rental?",
+      answer: "Cancellation rules depend on the listing, owner/provider and applicable booking terms.",
+    },
+    {
+      question: "How do I report a suspicious listing?",
+      answer: "Use the available reporting/support options on the platform or contact RentOut support.",
+    },
+    {
+      question: "Can I list multiple assets?",
+      answer: "Yes, subject to account, category and platform policies.",
+    },
+    {
+      question: "Is RentOut available across India?",
+      answer: "RentOut’s vision is to build an India-wide rental marketplace. Availability of specific categories and listings may vary by city and location.",
+    },
+    {
+      question: "What happens if an asset is damaged?",
+      answer: "Damage responsibility should be clearly defined in the applicable rental agreement or terms before the rental is completed. Users should inspect and document asset condition wherever appropriate.",
+    },
+    {
+      question: "Does RentOut guarantee every transaction?",
+      answer: "RentOut provides marketplace technology and applicable platform services. Users should review listing information, rental terms and applicable agreements before entering into a rental transaction.",
+    },
   ],
 };
 
+/** Empty until real customers give testimonials; the band hides itself. */
 export const testimonials = {
-  title: "Wall of Love",
-  subtitle: "Aliquam lacinia diam quis lacus euismod",
-  items: [
-    {
-      name: "Ali Tufan",
-      role: "Marketing",
-      avatar: "/img/avatar-1.jpg",
-      quote:
-        "“At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti ”",
-    },
-    {
-      name: "Albert Flores",
-      role: "Designer",
-      avatar: "/img/avatar-2.jpg",
-      quote:
-        "“Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae”",
-    },
-    {
-      name: "Robert Fox",
-      role: "Developer",
-      avatar: "/img/avatar-3.jpg",
-      quote:
-        "“Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit”",
-    },
-  ],
+  title: "What Our Users Say",
+  subtitle: "",
+  items: [] as { name: string; role: string; avatar: string; quote: string }[],
 };
 
 export const newsletter = {
-  title: "Subscribe to our newsletter for the latest updates and insights.",
+  title: "Your rental marketplace, wherever you go. The RentOut app is coming soon on Android.",
   placeholder: "Enter your email",
-  cta: "Subscribe",
-  note: "Stay ahead with the latest updates, insights, and events from Macat Megatrons.",
+  cta: "Join Waitlist",
+  note: "Join the waitlist to hear when you can search, discover and manage rentals from your smartphone.",
 };
 
 export const footer = {
   blurb:
-    "Macat Megatrons is a thriving community where to share knowledge, collaborate, and grow.",
-  socials: ["facebook", "instagram", "google", "x", "linkedin"],
-  contact: { phone: "+123 456 7890", email: "support@mm.com" },
-  copyright: "© 2025 Rentout. All rights reserved.",
-  legal: ["Privacy Policy", "Terms of Use"],
+    "One Platform. Every Rental Possibility. Rent what you need. List what you own. Earn from what you have.",
+  // Real handles, phone and inbox not confirmed yet; empty values stay hidden.
+  socials: [] as string[],
+  contact: { phone: "", email: "" },
+  copyright: "© 2026 RentOut. All Rights Reserved.",
+  legal: [] as string[],
 };

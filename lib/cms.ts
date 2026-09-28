@@ -194,10 +194,10 @@ export const fallbackContent: SiteContent = {
   },
   faq: {
     title: fallbackFaq.title,
-    items: [...fallbackFaq.columnOne, ...fallbackFaq.columnTwo].map((item) => ({
-      id: item.id,
+    items: fallbackFaq.items.map((item, index) => ({
+      id: `q${index + 1}`,
       question: item.question,
-      answer: fallbackFaq.answer,
+      answer: item.answer,
     })),
   },
   testimonials: {

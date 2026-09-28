@@ -23,7 +23,7 @@ export function FaqSection({ content }: { content: FaqContent }) {
   const right = content.items.filter((_, index) => index % 2 === 1);
 
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(240deg,#fff1e6_0%,#fff8f3_38%,#ffffff_72%)] py-[50px] lg:py-[70px]">
+    <section id="faq" className="relative overflow-hidden bg-[linear-gradient(240deg,#fff1e6_0%,#fff8f3_38%,#ffffff_72%)] py-[50px] lg:py-[70px]">
       <div className="shell">
         <h2 className="text-center text-[clamp(22px,2.5vw,32px)] font-bold text-navy">
           {content.title}
