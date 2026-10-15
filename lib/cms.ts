@@ -315,7 +315,12 @@ export async function getSiteContent(): Promise<SiteContent> {
     const data = payload?.data;
     if (!data?.hero) return fallbackContent;
 
-    const navLinks = Array.isArray(data.navLinks) && data.navLinks.length > 0
+    // The CMS response is authoritative once it has loaded: the backend already
+    // returns only the links an admin marked visible, so an EMPTY list means
+    // "all pages hidden" and must render as no nav - not silently refilled with
+    // the shipped fallback. The fallback is only for a missing/malformed field
+    // (and for an unreachable backend, handled above).
+    const navLinks = Array.isArray(data.navLinks)
       ? data.navLinks.map((link: NavLink) => ({ label: link.label, href: link.href }))
       : fallbackContent.navLinks;
 
