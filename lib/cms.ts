@@ -33,6 +33,22 @@ const CACHE_MODE = "no-store" as const;
 
 export type NavLink = { label: string; href: string };
 
+/**
+ * The site used to be one page, so older CMS rows still point at in-page
+ * anchors. Those sections are now pages; send the old anchors there.
+ */
+const LEGACY_ANCHORS: Record<string, string> = {
+  "#home": "/",
+  "#categories": "/explore-rentals",
+  "#about": "/about",
+  "#faq": "/faq",
+  "#contact": "/contact",
+};
+
+function toPagePath(href: string): string {
+  return LEGACY_ANCHORS[href?.trim()] ?? href;
+}
+
 export type HeroContent = {
   eyebrow: string;
   titleLines: { text: string; accent: boolean }[][];
@@ -260,8 +276,8 @@ function toHeroContent(hero: ApiHero): HeroContent {
     eyebrow: hero.eyebrow,
     titleLines: [[{ text: hero.titleLine1, accent: false }], ...(secondLine.length ? [secondLine] : [])],
     body: hero.body,
-    primaryCta: { label: hero.primaryCtaLabel, href: hero.primaryCtaHref },
-    secondaryCta: { label: hero.secondaryCtaLabel, href: hero.secondaryCtaHref },
+    primaryCta: { label: hero.primaryCtaLabel, href: toPagePath(hero.primaryCtaHref) },
+    secondaryCta: { label: hero.secondaryCtaLabel, href: toPagePath(hero.secondaryCtaHref) },
     imageUrl: imageUrls[0] ?? hero.imageUrl,
     imageUrls,
     slides: Math.max(1, imageUrls.length),
@@ -303,7 +319,7 @@ function toCitiesContent(section: {
     title: section.title,
     subtitle: section.subtitle,
     linkLabel: section.linkLabel,
-    linkHref: section.linkHref,
+    linkHref: toPagePath(section.linkHref),
     rows: [...byRow.entries()].sort((a, b) => a[0] - b[0]).map(([, tiles]) => tiles),
   };
 }
@@ -327,7 +343,7 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
     // the shipped fallback. The fallback is only for a missing/malformed field
     // (and for an unreachable backend, handled above).
     const navLinks = Array.isArray(data.navLinks)
-      ? data.navLinks.map((link: NavLink) => ({ label: link.label, href: link.href }))
+      ? data.navLinks.map((link: NavLink) => ({ label: link.label, href: toPagePath(link.href) }))
       : fallbackContent.navLinks;
 
     return {
@@ -376,7 +392,7 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
             title: data.about.title,
             body: data.about.body,
             ctaLabel: data.about.ctaLabel,
-            ctaHref: data.about.ctaHref,
+            ctaHref: toPagePath(data.about.ctaHref),
             steps: (data.about.steps ?? []).map((step: AboutStep) => ({
               title: step.title,
               body: step.body,
@@ -437,7 +453,7 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
             })),
             legalLinks: (data.footer.legalLinks ?? []).map((link: FooterLink) => ({
               label: link.label,
-              href: link.href,
+              href: toPagePath(link.href),
             })),
           }
         : fallbackContent.footer,
