@@ -14,7 +14,10 @@ const STORES = [
 ];
 
 export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
-  const links = navLinks?.length ? navLinks : nav;
+  // An explicit (even empty) list from the CMS wins: when an admin hides every
+  // page the array is empty and the nav must be empty too. Only a missing prop
+  // (navLinks === undefined) falls back to the shipped links.
+  const links = navLinks ?? nav;
   const [open, setOpen] = useState(false);
   // Each link is its own page, so the current path decides which is active.
   const pathname = usePathname();
@@ -38,7 +41,10 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
   }
 
   return (
-    <div>
+    // Sticky lives on this wrapper (not the <header>): its containing block is
+    // <body>, which spans the whole page, so the bar stays pinned through all
+    // scrolling. z-50 keeps it above the sections that scroll under it.
+    <div className="sticky top-0 z-50">
       {/* Figma: bottom radius 24px, 1px #FFCFB0 border, fill at 68% opacity,
           linear-gradient(90deg,#FFFFFB 0%,#FDF8EF 73.9%), blur(207.7px).
           The fill is its own layer so the 68% never touches the logo or links. */}
