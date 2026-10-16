@@ -31,7 +31,8 @@ type ApiCategory = {
   listingCount?: number;
 };
 
-export async function getHomeCategories(): Promise<CatalogueCategory[]> {
+/** `limit` defaults to the homepage count; pass `Infinity` for the full catalogue. */
+export async function getHomeCategories(limit = HOME_CATEGORY_LIMIT): Promise<CatalogueCategory[]> {
   try {
     const response = await fetch(`${API_URL}/public/categories`, { cache: "no-store" });
     if (!response.ok) return [];
@@ -40,7 +41,7 @@ export async function getHomeCategories(): Promise<CatalogueCategory[]> {
     const rows = payload?.data?.categories;
     if (!Array.isArray(rows)) return [];
 
-    return rows.slice(0, HOME_CATEGORY_LIMIT).map((category: ApiCategory) => ({
+    return rows.slice(0, limit).map((category: ApiCategory) => ({
       id: category.id,
       name: category.name,
       slug: category.slug,

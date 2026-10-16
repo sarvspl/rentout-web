@@ -27,8 +27,8 @@ export function SiteFooter({
     phone: fallbackFooter.contact.phone,
     email: fallbackFooter.contact.email,
     copyright: fallbackFooter.copyright,
-    socials: fallbackFooter.socials.map((platform) => ({ platform, url: "#contact" })),
-    legalLinks: fallbackFooter.legal.map((label) => ({ label, href: "#contact" })),
+    socials: fallbackFooter.socials.map((platform) => ({ platform, url: "/contact" })),
+    legalLinks: fallbackFooter.legal.map((label) => ({ label, href: "/contact" })),
   };
 
   const card: NewsletterContent = newsletter ?? {

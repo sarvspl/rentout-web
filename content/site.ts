@@ -10,11 +10,11 @@
  */
 
 export const nav = [
-  { label: "Home", href: "#home" },
-  { label: "Explore Rentals", href: "#categories" },
-  { label: "About Us", href: "#about" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Explore Rentals", href: "/explore-rentals" },
+  { label: "About Us", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 /** The navbar button. The apps are not out yet, hence the notice. */
@@ -33,8 +33,8 @@ export const hero = {
     ],
   ],
   body: "Rent what you need. List what you own. Earn from what you have. From homes and vehicles to laptops, cameras, furniture, machinery, event equipment and more — RentOut connects people and businesses looking to rent with owners ready to rent out.",
-  primaryCta: { label: "Explore Rentals", href: "#categories" },
-  secondaryCta: { label: "List Your Asset", href: "#contact" },
+  primaryCta: { label: "Explore Rentals", href: "/explore-rentals" },
+  secondaryCta: { label: "List Your Asset", href: "/contact" },
   imageUrls: ["/img/hero-collage.png"],
   slides: 1,
 };
@@ -275,4 +275,20 @@ export const footer = {
   contact: { phone: "", email: "" },
   copyright: "© 2026 RentOut. All Rights Reserved.",
   legal: [] as string[],
+};
+
+/** The Contact page intro (content master, section 15). Not CMS-managed yet. */
+export const contactPage = {
+  title: "Contact RentOut",
+  subtitle: "We're Here to Help.",
+  body: "Have a question about renting, listing an asset, becoming a business partner or using the RentOut platform? Our team is here to help.",
+  topics: [
+    { title: "Customer Support", body: "Rental questions, account assistance and platform support." },
+    { title: "Owner Support", body: "Listing, availability, pricing and rental-business assistance." },
+    {
+      title: "Business Partnerships",
+      body: "Rental companies, equipment providers, property owners, service providers and strategic partners.",
+    },
+    { title: "Technical Support", body: "Website, app, account and technical issues." },
+  ],
 };

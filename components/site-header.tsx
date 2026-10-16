@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { appCta, nav } from "@/content/site";
 import type { NavLink } from "@/lib/cms";
@@ -14,7 +16,10 @@ const STORES = [
 export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
   const links = navLinks?.length ? navLinks : nav;
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(links[0]?.label ?? "");
+  // Each link is its own page, so the current path decides which is active.
+  const pathname = usePathname();
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
   // The apps are not out yet, so the buttons answer rather than navigate.
   // The notice clears itself; the timer is held so a second press restarts it
@@ -44,7 +49,7 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
         />
         {/* Three columns from lg up, so the nav stays centred with store badges on the right. */}
         <div className="shell relative flex h-[68px] items-center justify-between gap-4 lg:grid lg:h-[80px] lg:grid-cols-[1fr_auto_1fr]">
-          <a href="#home" className="shrink-0 lg:justify-self-start">
+          <Link href="/" className="shrink-0 lg:justify-self-start">
             <Image
               src="/img/logo.png"
               alt="RentOut"
@@ -53,22 +58,22 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
               priority
               className="h-[50px] w-[50px] object-contain lg:h-[64px] lg:w-[64px]"
             />
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-8 lg:flex lg:justify-self-center xl:gap-10">
             {links.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
-                onClick={() => setActive(item.label)}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 className={
-                  active === item.label
+                  isActive(item.href)
                     ? "relative text-[15px] font-medium text-brand after:absolute after:-bottom-2 after:left-0 after:h-[2px] after:w-full after:bg-brand"
                     : "text-[15px] font-medium text-ink transition-colors hover:text-brand"
                 }
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -118,17 +123,19 @@ export function SiteHeader({ navLinks }: { navLinks?: NavLink[] }) {
           <div className="shell relative pb-5 lg:hidden">
             <nav className="flex flex-col gap-1 border-t border-ink/10 pt-3">
               {links.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
-                  onClick={() => {
-                    setActive(item.label);
-                    setOpen(false);
-                  }}
-                  className="rounded-lg px-3 py-2 text-[15px] text-ink hover:bg-white"
+                  onClick={() => setOpen(false)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
+                  className={
+                    isActive(item.href)
+                      ? "rounded-lg px-3 py-2 text-[15px] font-medium text-brand hover:bg-white"
+                      : "rounded-lg px-3 py-2 text-[15px] text-ink hover:bg-white"
+                  }
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
 
               <div className="mt-2.5 flex flex-wrap items-center gap-2">

@@ -19,6 +19,8 @@ import {
   footer as fallbackFooter,
 } from "@/content/site";
 
+import { cache } from "react";
+
 const API_URL = (process.env.RENTOUT_API_URL ?? "http://127.0.0.1:8081/api/v1").replace(/\/$/, "");
 
 /**
@@ -169,7 +171,7 @@ export const fallbackContent: SiteContent = {
     title: fallbackCities.title,
     subtitle: fallbackCities.subtitle,
     linkLabel: fallbackCities.linkLabel,
-    linkHref: "#categories",
+    linkHref: "/explore-rentals",
     rows: fallbackCities.rows.map((row) =>
       row.map((city) => ({
         name: city.name,
@@ -184,7 +186,7 @@ export const fallbackContent: SiteContent = {
     title: fallbackAbout.title,
     body: fallbackAbout.body.join(" "),
     ctaLabel: fallbackAbout.cta,
-    ctaHref: "#contact",
+    ctaHref: "/contact",
     steps: fallbackAbout.steps.map((step) => ({ title: step.title, body: step.body })),
     images: [
       ...fallbackAbout.gallery.columnOne.map((image) => ({ src: image.src, ratio: image.ratio, column: 1 })),
@@ -224,8 +226,8 @@ export const fallbackContent: SiteContent = {
     phone: fallbackFooter.contact.phone,
     email: fallbackFooter.contact.email,
     copyright: fallbackFooter.copyright,
-    socials: fallbackFooter.socials.map((platform) => ({ platform, url: "#contact" })),
-    legalLinks: fallbackFooter.legal.map((label) => ({ label, href: "#contact" })),
+    socials: fallbackFooter.socials.map((platform) => ({ platform, url: "/contact" })),
+    legalLinks: fallbackFooter.legal.map((label) => ({ label, href: "/contact" })),
   },
 };
 
@@ -306,7 +308,11 @@ function toCitiesContent(section: {
   };
 }
 
-export async function getSiteContent(): Promise<SiteContent> {
+/**
+ * Memoised per request: the layout (header, footer) and the page both read
+ * the copy, and should share one backend call.
+ */
+export const getSiteContent = cache(async (): Promise<SiteContent> => {
   try {
     const response = await fetch(`${API_URL}/public/cms`, { cache: CACHE_MODE });
     if (!response.ok) return fallbackContent;
@@ -435,4 +441,4 @@ export async function getSiteContent(): Promise<SiteContent> {
     // Backend unreachable: ship the page with the built-in copy.
     return fallbackContent;
   }
-}
+});
