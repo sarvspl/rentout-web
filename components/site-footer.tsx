@@ -3,6 +3,7 @@ import {
   newsletter as fallbackNewsletter,
   nav as fallbackNav,
 } from "@/content/site";
+import { defaultLegalLinks } from "@/content/legal";
 import type { FooterContent, NavLink, NewsletterContent } from "@/lib/cms";
 import { MailIcon, PhoneIcon, socialIcons } from "@/components/icons";
 import { NewsletterForm } from "@/components/newsletter-form";
@@ -146,7 +147,7 @@ export function SiteFooter({
           <div className="mt-6 flex flex-col gap-3 border-t border-ink/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[13px] text-ink/70">{footer.copyright}</p>
             <ul className="flex flex-wrap items-center gap-4 sm:gap-6">
-              {footer.legalLinks.map((item) => (
+              {(footer.legalLinks.length ? footer.legalLinks : defaultLegalLinks).map((item) => (
                 <li key={`${item.label}-${item.href}`}>
                   <a href={item.href} className="text-[13px] text-ink/70 hover:text-ink">
                     {item.label}
